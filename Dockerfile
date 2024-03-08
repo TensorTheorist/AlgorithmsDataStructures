@@ -24,7 +24,6 @@ WORKDIR /app/src/OptessaGPT
 # Set environment variables
 ENV FLASK_APP=GenAIPredictionModel.py
 ENV FLASK_ENV=production
-ENV OPENAI_API_KEY=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
 
 # Run the Flask application
 #CMD ["flask", "run", "--host=0.0.0.0", "--port=5001"]
