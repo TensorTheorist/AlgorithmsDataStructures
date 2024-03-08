@@ -12,21 +12,19 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install gunicorn
 
 # Copy the entire src directory and the data directory into the container
-COPY src/OptessaGPT ./src/OptessaGPT
+COPY src ./src
 COPY ./data ./data
 
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
 
 # Update the working directory in the container
-WORKDIR /app/src/OptessaGPT
+WORKDIR /app/src
 
 # Set environment variables
-ENV FLASK_APP=GenAIPredictionModel.py
+ENV FLASK_APP=main.py
 ENV FLASK_ENV=production
 
 # Run the Flask application
 #CMD ["flask", "run", "--host=0.0.0.0", "--port=5001"]
-CMD
- --bind :$PORT --workers 1 --threads 8 --timeout 0 GenAIPredictionModel:app
-
+CMD gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
